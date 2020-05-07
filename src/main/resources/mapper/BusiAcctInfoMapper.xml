@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.enn.ygego.sunny.user.dao.BusiAcctInfoMapper">
+
+    <resultMap type="com.reno.springboot.model.BusiAcctInfo" id="busiAcctInfoResultMap">
+        <result property="acctId" column="ACCT_ID"  />
+        <result property="channelId" column="CHANNEL_ID"  />
+        <result property="acctName" column="ACCT_NAME"  />
+        <result property="password" column="PASSWORD"  />
+        <result property="acctCode" column="ACCT_CODE"  />
+        <result property="acctState" column="ACCT_STATE"  />
+        <result property="authState" column="AUTH_STATE"  />
+        <result property="logoUrl" column="LOGO_URL"  />
+        <result property="name" column="NAME"  />
+        <result property="genderType" column="GENDER_TYPE"  />
+        <result property="deptId" column="DEPT_ID"  />
+        <result property="mobileNum" column="MOBILE_NUM"  />
+        <result property="email" column="EMAIL"  />
+        <result property="areaId" column="AREA_ID"  />
+        <result property="areaIdFullPath" column="AREA_ID_FULL_PATH"  />
+        <result property="areaNameFullPath" column="AREA_NAME_FULL_PATH"  />
+        <result property="contactAddr" column="CONTACT_ADDR"  />
+        <result property="postCode" column="POST_CODE"  />
+        <result property="registerTime" column="REGISTER_TIME"  />
+        <result property="updateTime" column="UPDATE_TIME"  />
+        <result property="lastLoginTime" column="LAST_LOGIN_TIME"  />
+        <result property="isDelete" column="IS_DELETE"  />
+        <result property="choiceAuthenType" column="CHOICE_AUTHEN_TYPE"  />
+        <result property="registrationSource" column="REGISTRATION_SOURCE"  />
+    </resultMap>
+
+    <sql id="table_columns">
+        ACCT_ID,
+        CHANNEL_ID,
+        ACCT_NAME,
+        PASSWORD,
+        ACCT_CODE,
+        ACCT_STATE,
+        AUTH_STATE,
+        LOGO_URL,
+        NAME,
+        GENDER_TYPE,
+        DEPT_ID,
+        MOBILE_NUM,
+        EMAIL,
+        AREA_ID,
+        AREA_ID_FULL_PATH,
+        AREA_NAME_FULL_PATH,
+        CONTACT_ADDR,
+        POST_CODE,
+        REGISTER_TIME,
+        UPDATE_TIME,
+        LAST_LOGIN_TIME,
+        IS_DELETE,
+        CHOICE_AUTHEN_TYPE,
+        REGISTRATION_SOURCE
+    </sql>
+    <sql id="entity_properties">
+        #{acctId},
+        #{channelId},
+        #{acctName},
+        #{password},
+        #{acctCode},
+        #{acctState},
+        #{authState},
+        #{logoUrl},
+        #{name},
+        #{genderType},
+        #{deptId},
+        #{mobileNum},
+        #{email},
+        #{areaId},
+        #{areaIdFullPath},
+        #{areaNameFullPath},
+        #{contactAddr},
+        #{postCode},
+        #{registerTime},
+        #{updateTime},
+        #{lastLoginTime},
+        #{isDelete},
+        #{choiceAuthenType},
+         #{registrationSource}
+    </sql>
+
+    <!-- columnName like concat('%',#columnName#,'%') -->
+    <sql id="page_where">
+        <trim prefix="where" prefixOverrides="and | or ">
+                <if test="acctId != null ">and ACCT_ID = #{acctId}</if>
+                <if test="channelId != null ">and CHANNEL_ID = #{channelId}</if>
+                <if test="acctName != null and acctName != ''">and ACCT_NAME = #{acctName}</if>
+                <if test="password != null and password != ''">and PASSWORD = #{password}</if>
+                <if test="acctCode != null and acctCode != ''">and ACCT_CODE = #{acctCode}</if>
+                <if test="acctState != null ">and ACCT_STATE = #{acctState}</if>
+                <if test="authState != null ">and AUTH_STATE = #{authState}</if>
+                <if test="logoUrl != null and logoUrl != ''">and LOGO_URL = #{logoUrl}</if>
+                <if test="name != null and name != ''">and NAME = #{name}</if>
+                <if test="genderType != null ">and GENDER_TYPE = #{genderType}</if>
+                <if test="deptId != null ">and DEPT_ID = #{deptId}</if>
+                <if test="mobileNum != null and mobileNum != ''">and MOBILE_NUM = #{mobileNum}</if>
+                <if test="email != null and email != ''">and EMAIL = #{email}</if>
+                <if test="areaId != null ">and AREA_ID = #{areaId}</if>
+                <if test="areaIdFullPath != null and areaIdFullPath != ''">and AREA_ID_FULL_PATH = #{areaIdFullPath}</if>
+                <if test="areaNameFullPath != null and areaNameFullPath != ''">and AREA_NAME_FULL_PATH = #{areaNameFullPath}</if>
+                <if test="contactAddr != null and contactAddr != ''">and CONTACT_ADDR = #{contactAddr}</if>
+                <if test="postCode != null and postCode != ''">and POST_CODE = #{postCode}</if>
+                <if test="registerTime != null ">and REGISTER_TIME = #{registerTime}</if>
+                <if test="updateTime != null ">and UPDATE_TIME = #{updateTime}</if>
+                <if test="lastLoginTime != null ">and LAST_LOGIN_TIME = #{lastLoginTime}</if>
+                <if test="isDelete != null ">and IS_DELETE = #{isDelete}</if>
+                <if test="choiceAuthenType != null ">and CHOICE_AUTHEN_TYPE = #{choiceAuthenType}</if>
+            <if test="registrationSource != null ">and REGISTRATION_SOURCE = #{registrationSource}</if>
+        </trim>
+    </sql>
+
+    <insert id="insert" parameterType="com.reno.springboot.model.BusiAcctInfo" useGeneratedKeys="true" keyProperty="acctId">
+        insert into busi_acct_info( <include refid="table_columns" />)
+        values ( <include refid="entity_properties" />)
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.reno.springboot.model.BusiAcctInfo" useGeneratedKeys="true" keyProperty="acctId">
+        insert into busi_acct_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="acctId != null ">ACCT_ID,</if>
+                <if test="channelId != null ">CHANNEL_ID,</if>
+                <if test="acctName != null and acctName != ''">ACCT_NAME,</if>
+                <if test="password != null and password != ''">PASSWORD,</if>
+                <if test="acctCode != null and acctCode != ''">ACCT_CODE,</if>
+                <if test="acctState != null ">ACCT_STATE,</if>
+                <if test="authState != null ">AUTH_STATE,</if>
+                <if test="logoUrl != null and logoUrl != ''">LOGO_URL,</if>
+                <if test="name != null and name != ''">NAME,</if>
+                <if test="genderType != null ">GENDER_TYPE,</if>
+                <if test="deptId != null ">DEPT_ID,</if>
+                <if test="mobileNum != null and mobileNum != ''">MOBILE_NUM,</if>
+                <if test="email != null and email != ''">EMAIL,</if>
+                <if test="areaId != null ">AREA_ID,</if>
+                <if test="areaIdFullPath != null and areaIdFullPath != ''">AREA_ID_FULL_PATH,</if>
+                <if test="areaNameFullPath != null and areaNameFullPath != ''">AREA_NAME_FULL_PATH,</if>
+                <if test="contactAddr != null and contactAddr != ''">CONTACT_ADDR,</if>
+                <if test="postCode != null and postCode != ''">POST_CODE,</if>
+                <if test="registerTime != null ">REGISTER_TIME,</if>
+                <if test="updateTime != null ">UPDATE_TIME,</if>
+                <if test="lastLoginTime != null ">LAST_LOGIN_TIME,</if>
+                <if test="isDelete != null ">IS_DELETE,</if>
+                <if test="choiceAuthenType != null ">CHOICE_AUTHEN_TYPE,</if>
+            <if test="registrationSource != null ">REGISTRATION_SOURCE,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="acctId != null ">#{acctId},</if>
+                <if test="channelId != null ">#{channelId},</if>
+                <if test="acctName != null and acctName != ''">#{acctName},</if>
+                <if test="password != null and password != ''">#{password},</if>
+                <if test="acctCode != null and acctCode != ''">#{acctCode},</if>
+                <if test="acctState != null ">#{acctState},</if>
+                <if test="authState != null ">#{authState},</if>
+                <if test="logoUrl != null and logoUrl != ''">#{logoUrl},</if>
+                <if test="name != null and name != ''">#{name},</if>
+                <if test="genderType != null ">#{genderType},</if>
+                <if test="deptId != null ">#{deptId},</if>
+                <if test="mobileNum != null and mobileNum != ''">#{mobileNum},</if>
+                <if test="email != null and email != ''">#{email},</if>
+                <if test="areaId != null ">#{areaId},</if>
+                <if test="areaIdFullPath != null and areaIdFullPath != ''">#{areaIdFullPath},</if>
+                <if test="areaNameFullPath != null and areaNameFullPath != ''">#{areaNameFullPath},</if>
+                <if test="contactAddr != null and contactAddr != ''">#{contactAddr},</if>
+                <if test="postCode != null and postCode != ''">#{postCode},</if>
+                <if test="registerTime != null ">#{registerTime},</if>
+                <if test="updateTime != null ">#{updateTime},</if>
+                <if test="lastLoginTime != null ">#{lastLoginTime},</if>
+                <if test="isDelete != null ">#{isDelete},</if>
+                <if test="choiceAuthenType != null ">#{choiceAuthenType},</if>
+            <if test="registrationSource != null ">#{registrationSource},</if>
+        </trim>
+    </insert>
+
+
+    <delete id="delete" parameterType="com.reno.springboot.model.BusiAcctInfo">
+        delete from busi_acct_info
+        <include refid="page_where" />
+    </delete>
+
+    <delete id="deleteByPrimaryKey">
+        delete from busi_acct_info
+        <trim prefix="where" prefixOverrides="and | or ">
+            <if test="1==1">and ACCT_ID = #{acctId}</if>
+        </trim>
+    </delete>
+
+    <update id="update" parameterType="com.reno.springboot.model.BusiAcctInfo">
+        update busi_acct_info
+        <trim prefix="set" suffixOverrides=",">
+                <if test="channelId != null ">CHANNEL_ID = #{channelId},</if>
+                <if test="acctName != null and acctName != ''">ACCT_NAME = #{acctName},</if>
+                <if test="password != null and password != ''">PASSWORD = #{password},</if>
+                <if test="acctCode != null and acctCode != ''">ACCT_CODE = #{acctCode},</if>
+                <if test="acctState != null ">ACCT_STATE = #{acctState},</if>
+                <if test="authState != null ">AUTH_STATE = #{authState},</if>
+                LOGO_URL = #{logoUrl},
+                <if test="name != null and name != ''">NAME = #{name},</if>
+                <if test="genderType != null ">GENDER_TYPE = #{genderType},</if>
+                <if test="deptId != null ">DEPT_ID = #{deptId},</if>
+                <if test="mobileNum != null and mobileNum != ''">MOBILE_NUM = #{mobileNum},</if>
+                EMAIL = #{email},
+                AREA_ID = #{areaId},
+                AREA_ID_FULL_PATH = #{areaIdFullPath},
+                AREA_NAME_FULL_PATH = #{areaNameFullPath},
+                CONTACT_ADDR = #{contactAddr},
+                POST_CODE = #{postCode},
+                <if test="registerTime != null ">REGISTER_TIME = #{registerTime},</if>
+                UPDATE_TIME = NOW(),
+                <if test="lastLoginTime != null ">LAST_LOGIN_TIME = #{lastLoginTime},</if>
+                <if test="isDelete != null ">IS_DELETE = #{isDelete},</if>
+                <if test="choiceAuthenType != null ">CHOICE_AUTHEN_TYPE = #{choiceAuthenType},</if>
+        </trim>
+        <trim prefix="where" prefixOverrides="and | or ">
+            <if test="1==1">and ACCT_ID = #{acctId}</if>
+        </trim>
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.reno.springboot.model.BusiAcctInfo">
+        update busi_acct_info
+        <trim prefix="set" suffixOverrides=",">
+            <if test="channelId != null ">CHANNEL_ID = #{channelId},</if>
+            <if test="acctName != null and acctName != ''">ACCT_NAME = #{acctName},</if>
+            <if test="password != null and password != ''">PASSWORD = #{password},</if>
+            <if test="acctCode != null and acctCode != ''">ACCT_CODE = #{acctCode},</if>
+            <if test="acctState != null ">ACCT_STATE = #{acctState},</if>
+            <if test="authState != null ">AUTH_STATE = #{authState},</if>
+            <if test="logoUrl != null and logoUrl != ''">LOGO_URL = #{logoUrl},</if>
+            <if test="name != null and name != ''">NAME = #{name},</if>
+            <if test="genderType != null ">GENDER_TYPE = #{genderType},</if>
+            <if test="deptId != null ">DEPT_ID = #{deptId},</if>
+            <if test="mobileNum != null and mobileNum != ''">MOBILE_NUM = #{mobileNum},</if>
+            <if test="email != null and email != ''">EMAIL = #{email},</if>
+            <if test="areaId != null ">AREA_ID = #{areaId},</if>
+            <if test="areaIdFullPath != null and areaIdFullPath != ''">AREA_ID_FULL_PATH = #{areaIdFullPath},</if>
+            <if test="areaNameFullPath != null and areaNameFullPath != ''">AREA_NAME_FULL_PATH = #{areaNameFullPath},</if>
+            <if test="contactAddr != null and contactAddr != ''">CONTACT_ADDR = #{contactAddr},</if>
+            <if test="postCode != null and postCode != ''">POST_CODE = #{postCode},</if>
+            <if test="registerTime != null ">REGISTER_TIME = #{registerTime},</if>
+            UPDATE_TIME = NOW(),
+            <if test="lastLoginTime != null ">LAST_LOGIN_TIME = #{lastLoginTime},</if>
+            <if test="isDelete != null ">IS_DELETE = #{isDelete},</if>
+            <if test="choiceAuthenType != null ">CHOICE_AUTHEN_TYPE = #{choiceAuthenType},</if>
+        </trim>
+        <trim prefix="where" prefixOverrides="and | or ">
+            <if test="1==1">and ACCT_ID = #{acctId}</if>
+        </trim>
+    </update>
+
+    <select id="findAll" resultMap="busiAcctInfoResultMap"  >
+        select <include refid="table_columns" />
+        from busi_acct_info
+    </select>
+
+    <select id="find" resultMap="busiAcctInfoResultMap"  >
+        select <include refid="table_columns" />
+        from busi_acct_info
+        <include refid="page_where" />
+    </select>
+
+    <select id="getCount" resultType="int"   >
+        select count(*) from busi_acct_info
+        <include refid="page_where" />
+    </select>
+
+    <select id="getByPrimaryKey" resultMap="busiAcctInfoResultMap"    >
+        select <include refid="table_columns" />
+        from busi_acct_info
+        <trim prefix="where" prefixOverrides="and | or ">
+            <if test="1==1">and ACCT_ID = #{acctId}</if>
+        </trim>
+    </select>
+
+    <!-- other SQL -->
+</mapper>
