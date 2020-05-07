@@ -1,6 +1,7 @@
 package com.reno.springboot.controller;
 
 import com.reno.springboot.model.User;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public String postUser(@RequestBody User user){
+    public String postUser(@Validated @RequestBody User user){
         users.put(user.getId(),user);
         return "success";
     }
