@@ -1,6 +1,9 @@
 package com.reno.springboot.controller;
 
+import com.reno.springboot.mapper.BusiAcctInfoMapper;
+import com.reno.springboot.model.BusiAcctInfo;
 import com.reno.springboot.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,9 @@ import java.util.Map;
 public class UserController {
 
     static Map<Long,User> users = Collections.synchronizedMap(new HashMap<Long,User>());
+
+    @Autowired
+    private BusiAcctInfoMapper busiAcctInfoMapper;
 
     @GetMapping("/")
     public List<User> getUserList(){
@@ -53,5 +59,11 @@ public class UserController {
     public String deleteUser(@PathVariable Long id){
         users.remove(id);
         return "success";
+    }
+
+    @GetMapping("/busiAcctInfoList")
+    public List<BusiAcctInfo> getBusiAcctInfoList(@RequestBody BusiAcctInfo busiAcctInfo){
+        List<BusiAcctInfo> busiAcctInfoList = busiAcctInfoMapper.find(busiAcctInfo);
+        return busiAcctInfoList;
     }
 }
